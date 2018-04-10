@@ -10,9 +10,11 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class PanelLabel extends JPanel implements ActionListener{
-	
+	private JLabel errorsin,
+			errorSupport;
 	private PanelProyecto pp;
 	private JTextField tfEscritor;
 	private JButton bConfirma;
@@ -40,6 +42,8 @@ public class PanelLabel extends JPanel implements ActionListener{
 				"Un nivel educativo debe de ser seleccionado o Colegiaturas pagadas debe de ser 0",
 				"El campo'Sueldo mensual' debe ser mayor a 0"
 				};// explicacion de los errores
+		errorsin =new JLabel("");
+		errorSupport= new JLabel("");
 		tfEscritor= new JTextField(20);
 		buscarLector = new JButton("Calcular desde Archivo");
 		bConfirma= new JButton("Calcular");
@@ -48,6 +52,8 @@ public class PanelLabel extends JPanel implements ActionListener{
 		
 		
 		this.tfEscritor.setEditable(false);
+		this.add(errorsin);
+		this.add(errorSupport);
 		this.add(buscarLector);
 		this.add(tfEscritor);
 		this.add(new PanelRes());
@@ -66,6 +72,8 @@ public class PanelLabel extends JPanel implements ActionListener{
 	public File buscarArchivo(){
 		JFileChooser choser= new JFileChooser("Busca Documento");
 		choser.setCurrentDirectory(new java.io.File("."));
+		choser.setAcceptAllFileFilterUsed(false);
+		choser.setFileFilter(new FileNameExtensionFilter("CSV File","csv"));
 		choser.setVisible(true);
 		int returnValue = choser.showOpenDialog(null);
 		if (returnValue == JFileChooser.APPROVE_OPTION) {
@@ -84,6 +92,7 @@ public class PanelLabel extends JPanel implements ActionListener{
 			destinoTemporal=this.buscarArchivo();
 			if(destinoTemporal!=null){
 				//reader y writer con el destino, poner info que tiene el archivo csv en otro csv(o la suma de todos?)
+				tfEscritor.setText(destino.toString());
 			}
 		}
 		else if(e.getSource()==bConfirma){
