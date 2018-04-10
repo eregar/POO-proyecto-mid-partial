@@ -12,8 +12,7 @@ import java.io.FileReader;
 import javax.swing.*;
 
 public class PanelLabel extends JPanel implements ActionListener{
-	private JLabel errorsin,
-			errorSupport;
+	
 	private PanelProyecto pp;
 	private JTextField tfEscritor;
 	private JButton bConfirma;
@@ -41,8 +40,6 @@ public class PanelLabel extends JPanel implements ActionListener{
 				"Un nivel educativo debe de ser seleccionado o Colegiaturas pagadas debe de ser 0",
 				"El campo'Sueldo mensual' debe ser mayor a 0"
 				};// explicacion de los errores
-		errorsin =new JLabel("");
-		errorSupport= new JLabel("");
 		tfEscritor= new JTextField(20);
 		buscarLector = new JButton("Calcular desde Archivo");
 		bConfirma= new JButton("Calcular");
@@ -51,8 +48,6 @@ public class PanelLabel extends JPanel implements ActionListener{
 		
 		
 		this.tfEscritor.setEditable(false);
-		this.add(errorsin);
-		this.add(errorSupport);
 		this.add(buscarLector);
 		this.add(tfEscritor);
 		this.add(new PanelRes());
