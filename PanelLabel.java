@@ -12,61 +12,62 @@ import java.io.FileReader;
 import javax.swing.*;
 
 public class PanelLabel extends JPanel implements ActionListener{
-	JLabel errorsin,
+	private JLabel errorsin,
 			errorSupport;
-	
-	JTextField //tfLector,
-				tfEscritor;
-	
-	JButton buscarLector,
-			//buscarEscritor,
-			pushInfoButton;
-	File destino;
+	private PanelProyecto pp;
+	private JTextField tfEscritor;
+	private JButton bConfirma;
+	private JButton buscarLector;
+	private String[] errores;// array con posibles errores en input de datos de usuario
+	private File destino;
 	//BufferedReader br;
-	public PanelLabel(){
+	public PanelLabel(PanelProyecto pp){
 		super();
 		this.setPreferredSize(new Dimension(250,700));
+		this.pp=pp;
+		this.errores= new String[]{"Se debe de llenar al bloque de nombre",
+				"Se debe de llenar el bloque de RFC",
+				"El campo 'sueldo mensual' solo debe de tener digitos",
+				"El campo 'Aguinaldo' solo debe de tener digitos",
+				"El campo de 'prima Vacacional' solo debe de tener digitos",
+				"El campo de 'Dediccion Medico' solo debe de tener digitos",
+				"El campo 'Deduccion gastos funerarios' solo debe de tener digitos",
+				"El campo 'Primas por seguro de gastos medicos' solo debe de tener digitos",
+				"El campo 'Creditos Hipotecarios' solo debe de tener digitos",
+				"El campo 'Donativos' solo debe de tener digitos",
+				"El campo 'Apor. de subcuentas de retiro' solo debe de tener digitos",
+				"El campo 'Transporte Escolar de hijos' solo debe de tener digitos",
+				"El campo 'Colegiaturas Pagadas' solo debe de tener digitos",
+				"Un nivel educativo debe de ser seleccionado o Colegiaturas pagadas debe de ser 0",
+				"El campo'Sueldo mensual' debe ser mayor a 0"
+				};// explicacion de los errores
 		errorsin =new JLabel("");
 		errorSupport= new JLabel("");
-		//tfLector= new JTextField(20);
 		tfEscritor= new JTextField(20);
 		buscarLector = new JButton("Calcular desde Archivo");
-		//buscarEscritor = new JButton("Guardar en nuevo Archivo");
-		pushInfoButton= new JButton("añadir informacion al archivo elegido");
-		
+		bConfirma= new JButton("Calcular");
+		bConfirma.setPreferredSize(new Dimension(200,200));
 		destino= null;
-		//this.tfLector.setEditable(true);
+		
+		
 		this.tfEscritor.setEditable(false);
-		this.pushInfoButton.setEnabled(false);
 		this.add(errorsin);
 		this.add(errorSupport);
 		this.add(buscarLector);
-		//this.add(tfLector);
-		//this.add(buscarEscritor);
 		this.add(tfEscritor);
-		this.add(pushInfoButton);
 		this.add(new PanelRes());
-		this.add(new JLabel("Resultado:"));
-		this.add(new JTextField(20));
+		this.add(bConfirma);
 		
 		
 		this.buscarLector.addActionListener(this);
-		//this.buscarEscritor.addActionListener(this);
+		this.bConfirma.addActionListener(this);
 	}
+	//----------------------------------------------------------------------------------
 	public void setError(String msg){// para el extra label cuando salgan los errores de info
-		errorsin.setText(msg);
+		JOptionPane.showMessageDialog(null,msg);
+		
 	}
-	public String getError(){// no c para que sirve
-		return errorsin.getText();
-	}
-	public void support(boolean activate){// activa o no el extra label
-		if (activate){
-			this.errorSupport.setText("solo debe de tener digitos");
-		}
-		else{
-			this.errorSupport.setText("");
-		}
-	}
+	//--------------------------------------------------------------------------------------
 	public File buscarArchivo(){
 		JFileChooser choser= new JFileChooser("Busca Documento");
 		choser.setCurrentDirectory(new java.io.File("."));
@@ -80,22 +81,26 @@ public class PanelLabel extends JPanel implements ActionListener{
 			return null;
 		}
 	}
-	
+	//--------------------------------------------------------------------------------------
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		File destinoTemporal;
-			if(e.getSource()==buscarLector){
-				destinoTemporal=this.buscarArchivo();
-				if(destinoTemporal!=null){
-					//reader y writer con el destino, poner info que tiene el archivo csv en otro csv(o la suma de todos?)
-				}
+		if(e.getSource()==buscarLector){
+			destinoTemporal=this.buscarArchivo();
+			if(destinoTemporal!=null){
+				//reader y writer con el destino, poner info que tiene el archivo csv en otro csv(o la suma de todos?)
 			}
-			/*else{
-				this.destino= buscarArchivo();
-				this.tfEscritor.setText(this.destino.toString());//tira null pointer exe
-				pushInfoButton.setEnabled(true);
-			}*/
-		
+		}
+		else if(e.getSource()==bConfirma){
+			int errorNumber= pp.validRes();
+			if (errorNumber==15){
+				//que mande los datos a clase que necesite
+		}
+		else{
+			this.setError(errores[errorNumber]);
+			System.out.println(errores[errorNumber]);	
+		}
+		}
 	}
-	
+	//---------------------------------------------------------------------------------
 }
