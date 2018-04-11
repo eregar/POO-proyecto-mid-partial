@@ -1,27 +1,27 @@
-
 public class Persona {
 	private String nombre,
 				   RFC,
 				   nivelEducativo;
-	private int salarioMensual,
-				Aguinaldo,
-				primaVacacional,
-				honorarios,
-				gastosFunerarios,
-				primasSGM,
-				interesesDevengados,
-				donativos,
-				transporteEscolar,
-				colegiatura,
-				AFORE;
+	private Double salarioMensual,
+				   Aguinaldo,
+				   primaVacacional,
+				   honorarios,
+				   gastosFunerarios,
+				   primasSGM,
+				   interesesDevengados,
+				   donativos,
+				   transporteEscolar,
+				   colegiatura,
+				   AFORE;
 	
+/*
 	public Persona () {
 		this.nombre = "";
 		this.RFC = "";
 	}
+*/
 	
-	
-	public Persona (String nombre, String RFC, String nivelEducativo, int salarioMensual, int Aguinaldo, int primaVacacional, int honorarios, int gastosFunerarios, int primasSGM, int interesesDevengados, int donativos ,int transporteEscolar, int colegiatura) {
+	public Persona (String nombre, String RFC, String nivelEducativo, Double salarioMensual, Double Aguinaldo, Double primaVacacional, Double honorarios, Double gastosFunerarios, Double primasSGM, Double interesesDevengados, Double donativos, Double transporteEscolar, Double colegiatura) {
 		this.nombre = nombre;
 		this.RFC = RFC;
 		this.nivelEducativo = nivelEducativo;
@@ -41,47 +41,47 @@ public class Persona {
 	
 	
 	
-	public int getAguinaldo () {
+	public Double getAguinaldo () {
 		return this.Aguinaldo;
 	}
 	
-	public int getSalarioMensual() {
+	public Double getSalarioMensual() {
 		return this.salarioMensual;
 	}
 	
-	public int getPrimaVacacional() {
+	public Double getPrimaVacacional() {
 		return this.primaVacacional;
 	}
 	
-	public int getHonorarios() {
+	public Double getHonorarios() {
 		return this.honorarios;
 	}
 	
-	public int getGastosFunerarios() {
+	public Double getGastosFunerarios() {
 		return this.gastosFunerarios;
 	}
 	
-	public int getPrimasSGM() {
+	public Double getPrimasSGM() {
 		return this.primasSGM;
 	}
 	
-	public int getInteresesDevengados() {
+	public Double getInteresesDevengados() {
 		return this.interesesDevengados;
 	}
 	
-	public int getDonativos() {
+	public Double getDonativos() {
 		return this.donativos;
 	}
 	
-	public int getTransporteEscolar() {
+	public Double getTransporteEscolar() {
 		return this.transporteEscolar;
 	}
 	
-	public int getColegiatura() {
+	public Double getColegiatura() {
 		return this.colegiatura;
 	}
 	
-	public int getAFORE() {
+	public Double getAFORE() {
 		return this.AFORE;
 	}
 	
