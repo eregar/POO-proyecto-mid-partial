@@ -8,6 +8,8 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
+import java.util.StringTokenizer;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -15,6 +17,11 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 public class PanelLabel extends JPanel implements ActionListener{
 	private JLabel errorsin,
 			errorSupport;
+	private String deducir1,
+					deducir2,
+					totalDeducible,
+					totalImpuestos;
+	
 	private PanelProyecto pp;
 	private JTextField tfEscritor;
 	private JButton bConfirma;
@@ -88,11 +95,31 @@ public class PanelLabel extends JPanel implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		File destinoTemporal;
+		String linea;
+		StringTokenizer st;
 		if(e.getSource()==buscarLector){
 			destinoTemporal=this.buscarArchivo();
 			if(destinoTemporal!=null){
-				//reader y writer con el destino, poner info que tiene el archivo csv en otro csv(o la suma de todos?)
-				tfEscritor.setText(destino.toString());
+				try {
+					BufferedReader br= new BufferedReader(new FileReader(destinoTemporal));
+					tfEscritor.setText(destino.toString());
+					while((linea=br.readLine()) !=null){
+						st=new StringTokenizer(linea,",");
+						// constructor de reduccion guardada en una variable temporal
+						//get the shit
+						//make the csv
+						//guardar en un string temporal y mandarlo a la otra ventana
+					}
+				} catch (FileNotFoundException e1) {
+					JOptionPane.showMessageDialog(null,"El archivo no se encontró o fue removido");
+					this.destino=null;
+					tfEscritor.setText("");
+				}  catch (IOException e1) {
+					JOptionPane.showMessageDialog(null,"No se pudo leer el archivo");
+					this.destino=null;
+					tfEscritor.setText("");
+				}
+				
 			}
 		}
 		else if(e.getSource()==bConfirma){

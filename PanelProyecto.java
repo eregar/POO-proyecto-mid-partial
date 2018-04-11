@@ -17,6 +17,7 @@ public class PanelProyecto extends JPanel {
 						pree,
 						protec,
 						ningun;
+	private String nivel;
 	//---------------------------------------------------------------------------------
 	public PanelProyecto(PanelLabel panel){
 		super();
@@ -95,39 +96,42 @@ public class PanelProyecto extends JPanel {
 			}
 			else{
 				try{
-					Integer.parseInt(this.textos[i].getText());
+					Double.parseDouble(this.textos[i].getText());
 				}catch(NumberFormatException e){
 					return i;
 				}
 			}
 		}
-		if(Integer.parseInt(this.textos[2].getText())<=0){
+		if(Double.parseDouble(this.textos[2].getText())<=0){
 			return 14;
 		}
 		if(!this.textos[12].getText().equals("0")){//valida 13 si coincide con 12
 			if(prim.isSelected()){
 				setBackground(Color.RED);
-				//descuento de primaria
+				nivel="Primaria";
 			}
 			else if(sec.isSelected()){
 				setBackground(Color.GREEN);
-				//descuento de secundaria
+				nivel="Secundaria";
 			}
 			else if(prep.isSelected()){
 				setBackground(Color.BLUE);
-				// descuento de prepa
+				nivel="Bachillerato";
 			}
 			else if (pree.isSelected()){
-				//descuento preescolar
+				nivel="Preescolar";
 			}
 			else if (protec.isSelected()){
-				//descuento profecional tecnico
+				nivel="Profesional Tecnico";
 			}
 			else{
 				return 13;
 			}
 		}
-		return 15;// si es que no hay error regresa 14
+		else{
+			nivel="ninguno";
+		}
+		return 15;// si es que no hay error regresa 15
 	}
 	//---------------------------------------------------------------------------------
 	//necesarios: Nombre,RFC,Salario Mensual
