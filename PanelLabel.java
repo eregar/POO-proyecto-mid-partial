@@ -95,8 +95,10 @@ public class PanelLabel extends JPanel implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		File destinoTemporal;
+		Deduccion calcular;
 		String linea;
-		StringTokenizer st;
+		String[] elementos;
+		//StringTokenizer st;
 		if(e.getSource()==buscarLector){
 			destinoTemporal=this.buscarArchivo();
 			if(destinoTemporal!=null){
@@ -104,14 +106,16 @@ public class PanelLabel extends JPanel implements ActionListener{
 					BufferedReader br= new BufferedReader(new FileReader(destinoTemporal));
 					tfEscritor.setText(destino.toString());
 					while((linea=br.readLine()) !=null){
-						st=new StringTokenizer(linea,",");
+						//st=new StringTokenizer(linea,",");
+						elementos= linea.split(",");
+					//String nombre, String RFC, String nivelEducativo, Double salarioMensual, Double Aguinaldo, Double primaVacacional, Double honorarios, Double gastosFunerarios, Double primasSGM, Double interesesDevengados, Double donativos, Double transporteEscolar, Double colegiatura
 						// constructor de reduccion guardada en una variable temporal
 						//get the shit
 						//make the csv
 						//guardar en un string temporal y mandarlo a la otra ventana
 					}
 				} catch (FileNotFoundException e1) {
-					JOptionPane.showMessageDialog(null,"El archivo no se encontró o fue removido");
+					JOptionPane.showMessageDialog(null,"El archivo no se encontrÃ³ o fue removido");
 					this.destino=null;
 					tfEscritor.setText("");
 				}  catch (IOException e1) {
