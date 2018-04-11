@@ -22,6 +22,8 @@ public class PanelLabel extends JPanel implements ActionListener{
 					totalDeducible,
 					totalImpuestos;
 	
+	private Deduccion D1;
+	
 	private PanelProyecto pp;
 	private JTextField tfEscritor;
 	private JButton bConfirma;
@@ -115,7 +117,7 @@ public class PanelLabel extends JPanel implements ActionListener{
 						//guardar en un string temporal y mandarlo a la otra ventana
 					}
 				} catch (FileNotFoundException e1) {
-					JOptionPane.showMessageDialog(null,"El archivo no se encontrÃ³ o fue removido");
+					JOptionPane.showMessageDialog(null,"El archivo no se encontró o fue removido");
 					this.destino=null;
 					tfEscritor.setText("");
 				}  catch (IOException e1) {
@@ -127,9 +129,17 @@ public class PanelLabel extends JPanel implements ActionListener{
 			}
 		}
 		else if(e.getSource()==bConfirma){
+			JTextField[] textos = this.pp.getTextos();
+			
 			int errorNumber= pp.validRes();
 			if (errorNumber==15){
 				//que mande los datos a clase que necesite
+				Persona sujeto1 = new Persona(textos[0].getText(), textos[1].getText(), textos[2].getText(), Double.parseDouble(textos[3].getText()), Double.parseDouble(textos[4].getText()), Double.parseDouble(textos[5].getText()), Double.parseDouble(textos[6].getText()), Double.parseDouble(textos[7].getText()), Double.parseDouble(textos[8].getText()), Double.parseDouble(textos[9].getText()), Double.parseDouble(textos[10].getText()), Double.parseDouble(textos[11].getText()), Double.parseDouble(textos[12].getText()));
+				//Aqui se crea la persona para poder luego meterla en la clase Deduccion (lugar donde se calculan los impuestos)
+				D1 = new Deduccion (sujeto1);
+				
+				
+				// con D1 se le puede sacar ahora si los resultados que se necesitan (en este caso con solo llamar a D1 puedes a los resultados de el calculo del impuesto (puede que necesitemos hacer gets de la clase Deducción.))
 		}
 		else{
 			this.setError(errores[errorNumber]);

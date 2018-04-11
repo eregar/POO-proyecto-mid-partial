@@ -4,17 +4,16 @@ public class Deduccion {
 	private Double	deducir1,
 					deducir2,
 					totalDeducible,
-					totalImpuestos;
-	private Persona persona1;
+					UtilidadNeta;
 	
 	
-	public Deduccion (String nombre, String RFC, String nivelEducativo, Double salarioMensual, Double Aguinaldo, Double primaVacacional, Double honorarios, Double gastosFunerarios, Double primasSGM, Double interesesDevengados, Double donativos, Double transporteEscolar, Double colegiatura) {
-		Persona persona1 = new Persona(nombre, RFC, nivelEducativo, salarioMensual, Aguinaldo, primaVacacional, honorarios, gastosFunerarios, primasSGM, interesesDevengados,donativos,transporteEscolar,colegiatura);
-		this.deducir1 = calculaAguinaldo(this.persona1.getAguinaldo(), this.persona1.getSalarioMensual()) + calculaPrimaVacacional(this.persona1.getPrimaVacacional()) + this.persona1.getHonorarios() + this.persona1.getGastosFunerarios() + this.persona1.getPrimasSGM() + this.persona1.getInteresesDevengados() + this.persona1.getDonativos() + this.persona1.getTransporteEscolar() + calculaColegiatura(this.persona1.getColegiatura(),this.persona1.getNivelEducativo());
-		deducir2 = calculaAFORE(this.persona1.getAFORE(), this.persona1.getSalarioMensual());
+	public Deduccion (Persona persona1) {
+		this.deducir1 = calculaAguinaldo(persona1.getAguinaldo(), persona1.getSalarioMensual()) + calculaPrimaVacacional(persona1.getPrimaVacacional()) + persona1.getHonorarios() + persona1.getGastosFunerarios() + persona1.getPrimasSGM() + persona1.getInteresesDevengados() + persona1.getDonativos() + persona1.getTransporteEscolar() + calculaColegiatura(persona1.getColegiatura(),persona1.getNivelEducativo());
+		deducir2 = calculaAFORE(persona1.getAFORE(), persona1.getSalarioMensual());
 		this.totalDeducible = this.deducir1 + this.deducir2;
+		this.UtilidadNeta = calculoImpuestos (this.totalDeducible, (persona1.getSalarioMensual() * 12));
 		
-		
+		// falta hacer lo de el panel y subirselo a edgar por git hub mas a parte checar lo del aguinaldo y eso (creo que eso se suma, no se resta)
 	}
 	
 	
@@ -105,93 +104,93 @@ public class Deduccion {
  		return deducibleColegiatura;
 	}
  	
- 	public Double calculoImpuestos(Double totalDeducible, Double totalImpuestos) {
- 		Double totalGanancias = 0.0,
+ 	public Double calculoImpuestos(Double totalDeducible, Double salarioAnual) {
+ 		Double utilidadAntesDeImpuestos = 0.0,
  			   excedenteGanancias = 0.0,
  			   montoAPagarExcedente = 0.0,
- 			   montoFinal = 0.0;
+ 			   utilidadNeta = 0.0;
  	//		   porcentaje = 0.0;
  		
  		
- 		totalGanancias = totalImpuestos - totalDeducible;
+ 		utilidadAntesDeImpuestos = salarioAnual - totalDeducible;
  		
- 		if (totalGanancias <= 5952.84) {
- 			excedenteGanancias = totalGanancias - 0.01;
+ 		if (utilidadAntesDeImpuestos <= 5952.84) {
+ 			excedenteGanancias = utilidadAntesDeImpuestos - 0.01;
  	//		porcentaje = 01.92;
  			montoAPagarExcedente = excedenteGanancias * .0192;
- 			montoFinal = montoAPagarExcedente + 0.0;
+ 			utilidadNeta = montoAPagarExcedente + 0.0;
  		}
  		
- 		else if ((totalGanancias > 5952.84) && (totalGanancias <= 50524.92)) {
- 			excedenteGanancias = totalGanancias - 5952.85;
+ 		else if ((utilidadAntesDeImpuestos > 5952.84) && (utilidadAntesDeImpuestos <= 50524.92)) {
+ 			excedenteGanancias = utilidadAntesDeImpuestos - 5952.85;
  	//		porcentaje = 6.40;
  			montoAPagarExcedente = excedenteGanancias * .0640;
- 			montoFinal = montoAPagarExcedente + 114.29;
+ 			utilidadNeta = montoAPagarExcedente + 114.29;
  		}
  		
- 		else if ((totalGanancias > 50524.92) && (totalGanancias <= 88793.04)) {
- 			excedenteGanancias = totalGanancias - 50524.93;
+ 		else if ((utilidadAntesDeImpuestos > 50524.92) && (utilidadAntesDeImpuestos <= 88793.04)) {
+ 			excedenteGanancias = utilidadAntesDeImpuestos - 50524.93;
  	//		porcentaje = 10.88;
  			montoAPagarExcedente = excedenteGanancias * .1088;
- 			montoFinal = montoAPagarExcedente + 2966.91;
+ 			utilidadNeta = montoAPagarExcedente + 2966.91;
  		}
  		
- 		else if ((totalGanancias > 88793.04) && (totalGanancias <= 103218.00)) {
- 			excedenteGanancias = totalGanancias - 88793.05;
+ 		else if ((utilidadAntesDeImpuestos > 88793.04) && (utilidadAntesDeImpuestos <= 103218.00)) {
+ 			excedenteGanancias = utilidadAntesDeImpuestos - 88793.05;
  	//		porcentaje = 16.00;
  			montoAPagarExcedente = excedenteGanancias * .16;
- 			montoFinal = montoAPagarExcedente + 7130.48;
+ 			utilidadNeta = montoAPagarExcedente + 7130.48;
  		}
  		
- 		else if ((totalGanancias > 103218.00) && (totalGanancias <= 123580.20)) {
- 			excedenteGanancias = totalGanancias - 103218.01;
+ 		else if ((utilidadAntesDeImpuestos > 103218.00) && (utilidadAntesDeImpuestos <= 123580.20)) {
+ 			excedenteGanancias = utilidadAntesDeImpuestos - 103218.01;
  	//		porcentaje = 17.92;
  			montoAPagarExcedente = excedenteGanancias * .1792;
- 			montoFinal = montoAPagarExcedente + 9438.47;
+ 			utilidadNeta = montoAPagarExcedente + 9438.47;
  		}
  		
- 		else if ((totalGanancias > 123580.20) && (totalGanancias <= 249243.48)) {
- 			excedenteGanancias = totalGanancias - 123580.21;
+ 		else if ((utilidadAntesDeImpuestos > 123580.20) && (utilidadAntesDeImpuestos <= 249243.48)) {
+ 			excedenteGanancias = utilidadAntesDeImpuestos - 123580.21;
  	//		porcentaje = 21.36;
  			montoAPagarExcedente = excedenteGanancias * .2136;
- 			montoFinal = montoAPagarExcedente + 13087.37;
+ 			utilidadNeta = montoAPagarExcedente + 13087.37;
  		}
  		
- 		else if ((totalGanancias > 249243.48) && (totalGanancias <= 392841.96)) {
- 			excedenteGanancias = totalGanancias - 249243.49;
+ 		else if ((utilidadAntesDeImpuestos > 249243.48) && (utilidadAntesDeImpuestos <= 392841.96)) {
+ 			excedenteGanancias = utilidadAntesDeImpuestos - 249243.49;
  	//		porcentaje = 23.52;
  			montoAPagarExcedente = excedenteGanancias * .2352;
- 			montoFinal = montoAPagarExcedente + 39929.05;
+ 			utilidadNeta = montoAPagarExcedente + 39929.05;
  		}
  		
- 		else if ((totalGanancias > 392841.96) && (totalGanancias <= 750000.00)) {
- 			excedenteGanancias = totalGanancias - 392841.97;
+ 		else if ((utilidadAntesDeImpuestos > 392841.96) && (utilidadAntesDeImpuestos <= 750000.00)) {
+ 			excedenteGanancias = utilidadAntesDeImpuestos - 392841.97;
  	//		porcentaje = 30.0;
  			montoAPagarExcedente = excedenteGanancias * .30;
- 			montoFinal = montoAPagarExcedente + 73703.41;
+ 			utilidadNeta = montoAPagarExcedente + 73703.41;
  		}
  		
- 		else if ((totalGanancias > 750000.00) && (totalGanancias <= 1000000.00)) {
- 			excedenteGanancias = totalGanancias - 750000.01;
+ 		else if ((utilidadAntesDeImpuestos > 750000.00) && (utilidadAntesDeImpuestos <= 1000000.00)) {
+ 			excedenteGanancias = utilidadAntesDeImpuestos - 750000.01;
  	//		porcentaje = 32.0;
  			montoAPagarExcedente = excedenteGanancias * .32;
- 			montoFinal = montoAPagarExcedente + 180850.82;
+ 			utilidadNeta = montoAPagarExcedente + 180850.82;
  		}
  		
- 		else if ((totalGanancias > 1000000.00) && (totalGanancias <= 3000000.00)) {
- 			excedenteGanancias = totalGanancias - 1000000.01;
+ 		else if ((utilidadAntesDeImpuestos > 1000000.00) && (utilidadAntesDeImpuestos <= 3000000.00)) {
+ 			excedenteGanancias = utilidadAntesDeImpuestos - 1000000.01;
  	//		porcentaje = 34.0;
  			montoAPagarExcedente = excedenteGanancias * .34;
- 			montoFinal = montoAPagarExcedente + 260850.81;
+ 			utilidadNeta = montoAPagarExcedente + 260850.81;
  		}
  		
- 		else if (totalGanancias > 3000000.00){
- 			excedenteGanancias = totalGanancias - 3000000.01;
+ 		else if (utilidadAntesDeImpuestos > 3000000.00){
+ 			excedenteGanancias = utilidadAntesDeImpuestos - 3000000.01;
  	//		porcentaje = 35.0;
  			montoAPagarExcedente = excedenteGanancias * .35;
- 			montoFinal = montoAPagarExcedente + 940850.81;
+ 			utilidadNeta = montoAPagarExcedente + 940850.81;
  		}
-		return montoFinal;
+		return utilidadNeta;
  	}
 
  	

@@ -9,7 +9,7 @@ public class PanelProyecto extends JPanel {
 	
 	private JButton bConfirma;// boton de confirmar
 	private JTextField[] textos;// array con todos los textfields en orden
-	private JLabel[] labelTextos;//array con todos los labels correspondientes a los textfields
+//	private JLabel[] labelTextos;     array con todos los labels correspondientes a los textfields............nunca utilizas los labelTextos
 	private PanelLabel ePanel;
 	private JRadioButton prim,
 						sec,
@@ -26,7 +26,7 @@ public class PanelProyecto extends JPanel {
 		this.prep= new JRadioButton("Prepa");
 		this.pree=new JRadioButton("Preescolar");
 		this.protec=new JRadioButton("Profesional Tecnico");
-		this.ningun= new JRadioButton("Ninguno");
+		this.ningun= new JRadioButton("Ninguno", true);
 		
 		ButtonGroup bg= new ButtonGroup();
 		bg.add(prim);
@@ -70,7 +70,7 @@ public class PanelProyecto extends JPanel {
 		this.add(textos[11]);
 		this.add(new JLabel("Colegiaturas pagadas"));
 		this.add(textos[12]);
-		//this.add(new JLabel("Nivel Educativo"));
+		this.add(new JLabel("                Nivel Educativo:               "));
 		//this.add(textos[13]);//aaaaaaaaaaaaaAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 		this.add(pree);
 		this.add(prim);
@@ -79,6 +79,12 @@ public class PanelProyecto extends JPanel {
 		this.add(protec);
 		this.add(ningun);
 	}
+	
+	public JTextField[] getTextos() {
+		return this.textos;
+	}
+	
+	
 	//---------------------------------------------------------------------------------
 	public int validRes(){// valida todos los tf, regresa el tf que este haciendo conflicto (solo uno)
 		for (int i=0;i<2;i++){// valida 0-1 si hay algo

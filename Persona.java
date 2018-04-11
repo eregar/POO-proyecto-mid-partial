@@ -3,7 +3,7 @@ public class Persona {
 				   RFC,
 				   nivelEducativo;
 	private Double salarioMensual,
-				   Aguinaldo,
+				   aguinaldo,
 				   primaVacacional,
 				   honorarios,
 				   gastosFunerarios,
@@ -14,19 +14,13 @@ public class Persona {
 				   colegiatura,
 				   AFORE;
 	
-/*
-	public Persona () {
-		this.nombre = "";
-		this.RFC = "";
-	}
-*/
 	
 	public Persona (String nombre, String RFC, String nivelEducativo, Double salarioMensual, Double Aguinaldo, Double primaVacacional, Double honorarios, Double gastosFunerarios, Double primasSGM, Double interesesDevengados, Double donativos, Double transporteEscolar, Double colegiatura) {
 		this.nombre = nombre;
 		this.RFC = RFC;
 		this.nivelEducativo = nivelEducativo;
 		this.salarioMensual = salarioMensual;
-		this.Aguinaldo = Aguinaldo;
+		this.aguinaldo = Aguinaldo;
 		this.primaVacacional = primaVacacional;
 		this.honorarios = honorarios;
 		this.gastosFunerarios = gastosFunerarios;
@@ -42,7 +36,7 @@ public class Persona {
 	
 	
 	public Double getAguinaldo () {
-		return this.Aguinaldo;
+		return this.aguinaldo;
 	}
 	
 	public Double getSalarioMensual() {

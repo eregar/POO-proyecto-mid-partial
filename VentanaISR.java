@@ -6,8 +6,9 @@ import javax.swing.JPanel;
 public class VentanaISR extends JFrame{
 	private PanelLabel ePanel;
 	private PanelProyecto pp;
+	
 	public VentanaISR(){
-		super();
+		super("Calculo Impuestos");
 		this.ePanel= new PanelLabel(new PanelProyecto(ePanel));// pa que no se tire alv
 		this.pp=new PanelProyecto(ePanel);
 		this.ePanel= new PanelLabel(pp);
