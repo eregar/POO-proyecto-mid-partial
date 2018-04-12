@@ -8,7 +8,9 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.StringTokenizer;
 
 import javax.swing.*;
@@ -92,7 +94,7 @@ public class PanelLabel extends JPanel implements ActionListener{
 				rfc,
 				utilidadBruta,
 				montoDeducible,
-				utilidadNeta,
+				totalAPagar,
 				montoMaximo,
 				montoMinimo;
 		String[] elementos;
@@ -102,7 +104,7 @@ public class PanelLabel extends JPanel implements ActionListener{
 		rfc="";
 		utilidadBruta="";
 		montoDeducible="";
-		utilidadNeta="";
+		totalAPagar="";
 		montoMaximo="";
 		montoMinimo="";
 		if(e.getSource()==buscarLector){
@@ -111,21 +113,31 @@ public class PanelLabel extends JPanel implements ActionListener{
 				try {
 					BufferedReader br= new BufferedReader(new FileReader(destinoTemporal));
 					tfEscritor.setText(destino.toString());
+					//aquiiii
+					FileWriter fw= new FileWriter(destino.toString()+"\\Empresa.csv");
+					PrintWriter pw=new PrintWriter(fw);
+					pw.println("Nombre,RFC,Sueldo Mensual,Sueldo Anual,Aguinaldo,Aguinaldo Excento, Aguinaldo Grabado, Prima Vacacional, Prima Vacacional Excenta, Prima Vacacional Grabado, Total ingresos gravan, Honorarios, Gastos Funerarios, Primas de SGM, Hipotecarios, Donativos,Subcuenta de retiro, Transporte escolar, Nivel educativo, Maximo a deducir colegiatura, colegiatura pagada, total deducciones(sin retiro), deduccion permitida 10%, Monto ISR, Cuota fija, Porcentaje excedente, Pago excedente, Total a pagar");
 					while((linea=br.readLine()) !=null){
 						elementos= linea.split(",");
+						System.out.println(elementos.length);
 						Persona person = new Persona(elementos[0], elementos[1],elementos[12], Double.parseDouble(elementos[2]), Double.parseDouble(elementos[3]), Double.parseDouble(elementos[4]), Double.parseDouble(elementos[5]), Double.parseDouble(elementos[6]), Double.parseDouble(elementos[7]), Double.parseDouble(elementos[8]), Double.parseDouble(elementos[9]), Double.parseDouble(elementos[10]), Double.parseDouble(elementos[11]), Double.parseDouble(elementos[13]));
 						calcular= new Deduccion(person);
 						nombre+=person.getNombre()+",";
 						rfc+=person.getRFC()+",";
 						utilidadBruta+=calcular.getUtilidadBruta()+",";
 						montoDeducible+=calcular.getTotalDeducible()+",";
-						utilidadNeta+=calcular.getUtilidadNeta()+",";
-						montoMaximo+=calcular.getAFORE()+",";
-						montoMinimo+=calcular.getAguinaldo()+",";
-						//make the csv
-							
+						totalAPagar+=calcular.getTotalAPagar()+",";
+						montoMaximo+=calcular.getDeduccionPermitida()+",";
+						montoMinimo+=calcular.getAFORE()+",";
+						
+						pw.println(person.getNombre()+","+person.getRFC()+","+person.getSalarioMensual()+","+person.getSalarioMensual()*12+","+person.getAguinaldo()+","+calcular.getAguinaldoEscento()+","+(person.getAguinaldo()-calcular.getAguinaldoEscento())+","+person.getPrimaVacacional()+","+calcular.getPrimaVacacionalExcenta()+","+(person.getPrimaVacacional()-calcular.getPrimaVacacionalExcenta())+","+calcular.getUtilidadBruta()+","+person.getHonorarios()+","+person.getGastosFunerarios()+","+person.getPrimasSGM()+","+person.getInteresesDevengados()+","+person.getDonativos()+","+person.getAFORE()+","+person.getTransporteEscolar()
+						+","+elementos[12]+","+calcular.getDeduciColegiatura()+","+person.getColegiatura()+","+calcular.getDeducir1()+","+calcular.getDeduccionPermitida()+","+calcular.getTotalDeducible()+","+calcular.getQuotaFija()+","+calcular.getPorcentaje()+","+calcular.getMontoAPagar()+","+calcular.getTotalAPagar());
+						System.out.println(elementos.length);	
 					}
-					new VentanaResultados(nombre,rfc,utilidadBruta,montoDeducible,utilidadNeta,montoMaximo,montoMinimo);
+					pw.close();
+					br.close();
+					JOptionPane.showMessageDialog(null, "Archivo scv creado en el mismo directorio!!!");
+					new VentanaResultados(nombre,rfc,utilidadBruta,montoDeducible,totalAPagar,montoMaximo,montoMinimo);
 				} catch (FileNotFoundException e1) {
 					JOptionPane.showMessageDialog(null,"El archivo no se encontró o fue removido");
 					this.destino=null;
@@ -151,11 +163,11 @@ public class PanelLabel extends JPanel implements ActionListener{
 				rfc=person.getRFC();
 				utilidadBruta=calcular.getUtilidadBruta();
 				montoDeducible=calcular.getTotalDeducible();
-				utilidadNeta=calcular.getUtilidadNeta();
+				totalAPagar=calcular.getTotalAPagar();
 				montoMaximo=calcular.getAFORE();
-				montoMinimo=calcular.getAguinaldo();
+				montoMinimo=calcular.getDeducir1();
 				
-				new VentanaResultados(nombre,rfc,utilidadBruta,montoDeducible,utilidadNeta,montoMaximo,montoMinimo);
+				new VentanaResultados(nombre,rfc,utilidadBruta,montoDeducible,totalAPagar,montoMaximo,montoMinimo);
 				
 				// con D1 se le puede sacar ahora si los resultados que se necesitan (en este caso con solo llamar a D1 puedes a los resultados de el calculo del impuesto (puede que necesitemos hacer gets de la clase Deducción.))
 		}

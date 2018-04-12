@@ -39,12 +39,12 @@ public class PanelResultados extends JPanel{
 		g.drawString("Utilidad Bruta: "+this.utilidadBrutas[cont], 10,100);
 		g.drawString("Monto Deducible: "+this.montoDeducibles[cont], 10, 120);
 		g.drawLine(10, 130, 100, 130);
-		g.drawString("Utilidad Neta: "+this.utilidadNetas[cont], 10, 150);
+		g.drawString("Total a Pagar: "+this.utilidadNetas[cont], 10, 150);
 		
 		g.drawString("Monto Maximo Permitido: "+this.montoMaximo[cont], 200, 100);
-		g.drawString("Monto minimo Permitido: "+this.montoMinimo[cont], 200, 120);
+		g.drawString("Monto Maximo Retiro: "+this.montoMinimo[cont], 200, 120);
 		g.drawLine(200, 130, 290, 130);
-		g.drawString("Monto Deducible(ISR): "+this.montoDeducibles[cont] , 200, 150);
+		g.drawString("Monto Deducible: "+this.montoDeducibles[cont] , 200, 150);
 	}
 	
 	public void next(){

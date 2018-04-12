@@ -71,7 +71,6 @@ public class PanelProyecto extends JPanel {
 		this.add(new JLabel("Monto pagado de Colegiatura"));
 		this.add(textos[12]);
 		this.add(new JLabel("                Nivel Educativo:               "));
-		//this.add(textos[13]);//aaaaaaaaaaaaaAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 		this.add(pree);
 		this.add(prim);
 		this.add(sec);
