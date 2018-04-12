@@ -4,8 +4,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 public class PanelRes extends JPanel {
-	public PanelRes(){
+	public PanelRes(int x,int y){
 		super();
-		this.setPreferredSize(new Dimension(250,300));
+		this.setPreferredSize(new Dimension(x,y));
 	}
 }

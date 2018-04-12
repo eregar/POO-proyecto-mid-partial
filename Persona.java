@@ -29,11 +29,16 @@ public class Persona {
 		this.donativos = donativos;
 		this.transporteEscolar = transporteEscolar;
 		this.colegiatura = colegiatura;
+		this.AFORE=AFORE;
 	
 	}
 	
-	
-	
+	public String getNombre(){
+		return this.nombre;
+	}
+	public String getRFC(){
+		return this.RFC;
+	}
 	
 	public Double getAguinaldo () {
 		return this.aguinaldo;

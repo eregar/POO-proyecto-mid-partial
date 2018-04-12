@@ -15,13 +15,6 @@ import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class PanelLabel extends JPanel implements ActionListener{
-	private JLabel errorsin,
-			errorSupport;
-	private String deducir1,
-					deducir2,
-					totalDeducible,
-					totalImpuestos;
-	
 	private Deduccion D1;
 	
 	private PanelProyecto pp;
@@ -51,8 +44,6 @@ public class PanelLabel extends JPanel implements ActionListener{
 				"Un nivel educativo debe de ser seleccionado o Colegiaturas pagadas debe de ser 0",
 				"El campo'Sueldo mensual' debe ser mayor a 0"
 				};// explicacion de los errores
-		errorsin =new JLabel("");
-		errorSupport= new JLabel("");
 		tfEscritor= new JTextField(20);
 		buscarLector = new JButton("Calcular desde Archivo");
 		bConfirma= new JButton("Calcular");
@@ -61,11 +52,9 @@ public class PanelLabel extends JPanel implements ActionListener{
 		
 		
 		this.tfEscritor.setEditable(false);
-		this.add(errorsin);
-		this.add(errorSupport);
 		this.add(buscarLector);
 		this.add(tfEscritor);
-		this.add(new PanelRes());
+		this.add(new PanelRes(250,300));
 		this.add(bConfirma);
 		
 		
@@ -98,9 +87,24 @@ public class PanelLabel extends JPanel implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		File destinoTemporal;
 		Deduccion calcular;
-		String linea;
+		String linea,
+				nombre,
+				rfc,
+				utilidadBruta,
+				montoDeducible,
+				utilidadNeta,
+				montoMaximo,
+				montoMinimo;
 		String[] elementos;
-		//StringTokenizer st;
+		
+		
+		nombre="";
+		rfc="";
+		utilidadBruta="";
+		montoDeducible="";
+		utilidadNeta="";
+		montoMaximo="";
+		montoMinimo="";
 		if(e.getSource()==buscarLector){
 			destinoTemporal=this.buscarArchivo();
 			if(destinoTemporal!=null){
@@ -108,14 +112,20 @@ public class PanelLabel extends JPanel implements ActionListener{
 					BufferedReader br= new BufferedReader(new FileReader(destinoTemporal));
 					tfEscritor.setText(destino.toString());
 					while((linea=br.readLine()) !=null){
-						//st=new StringTokenizer(linea,",");
 						elementos= linea.split(",");
-					//String nombre, String RFC, String nivelEducativo, Double salarioMensual, Double Aguinaldo, Double primaVacacional, Double honorarios, Double gastosFunerarios, Double primasSGM, Double interesesDevengados, Double donativos, Double transporteEscolar, Double colegiatura
-						// constructor de reduccion guardada en una variable temporal
-						//get the shit
+						Persona person = new Persona(elementos[0], elementos[1],elementos[12], Double.parseDouble(elementos[2]), Double.parseDouble(elementos[3]), Double.parseDouble(elementos[4]), Double.parseDouble(elementos[5]), Double.parseDouble(elementos[6]), Double.parseDouble(elementos[7]), Double.parseDouble(elementos[8]), Double.parseDouble(elementos[9]), Double.parseDouble(elementos[10]), Double.parseDouble(elementos[11]), Double.parseDouble(elementos[13]));
+						calcular= new Deduccion(person);
+						nombre+=person.getNombre()+",";
+						rfc+=person.getRFC()+",";
+						utilidadBruta+=calcular.getUtilidadBruta()+",";
+						montoDeducible+=calcular.getTotalDeducible()+",";
+						utilidadNeta+=calcular.getUtilidadNeta()+",";
+						montoMaximo+=calcular.getAFORE()+",";
+						montoMinimo+=calcular.getAguinaldo()+",";
 						//make the csv
-						//guardar en un string temporal y mandarlo a la otra ventana
+							
 					}
+					new VentanaResultados(nombre,rfc,utilidadBruta,montoDeducible,utilidadNeta,montoMaximo,montoMinimo);
 				} catch (FileNotFoundException e1) {
 					JOptionPane.showMessageDialog(null,"El archivo no se encontró o fue removido");
 					this.destino=null;
@@ -134,10 +144,18 @@ public class PanelLabel extends JPanel implements ActionListener{
 			int errorNumber= pp.validRes();
 			if (errorNumber==15){
 				//que mande los datos a clase que necesite
-				Persona sujeto1 = new Persona(textos[0].getText(), textos[1].getText(), "Aqui va el nivel Educativo", Double.parseDouble(textos[2].getText()), Double.parseDouble(textos[3].getText()), Double.parseDouble(textos[4].getText()), Double.parseDouble(textos[5].getText()), Double.parseDouble(textos[6].getText()), Double.parseDouble(textos[7].getText()), Double.parseDouble(textos[8].getText()), Double.parseDouble(textos[9].getText()), Double.parseDouble(textos[10].getText()), Double.parseDouble(textos[11].getText()), Double.parseDouble(textos[12].getText()));
+				Persona person = new Persona(textos[0].getText(), textos[1].getText(), this.pp.getNivel(), Double.parseDouble(textos[2].getText()), Double.parseDouble(textos[3].getText()), Double.parseDouble(textos[4].getText()), Double.parseDouble(textos[5].getText()), Double.parseDouble(textos[6].getText()), Double.parseDouble(textos[7].getText()), Double.parseDouble(textos[8].getText()), Double.parseDouble(textos[9].getText()), Double.parseDouble(textos[10].getText()), Double.parseDouble(textos[11].getText()), Double.parseDouble(textos[12].getText()));
 				//Aqui se crea la persona para poder luego meterla en la clase Deduccion (lugar donde se calculan los impuestos)
-				D1 = new Deduccion (sujeto1);
+				calcular = new Deduccion (person);
+				nombre=person.getNombre();
+				rfc=person.getRFC();
+				utilidadBruta=calcular.getUtilidadBruta();
+				montoDeducible=calcular.getTotalDeducible();
+				utilidadNeta=calcular.getUtilidadNeta();
+				montoMaximo=calcular.getAFORE();
+				montoMinimo=calcular.getAguinaldo();
 				
+				new VentanaResultados(nombre,rfc,utilidadBruta,montoDeducible,utilidadNeta,montoMaximo,montoMinimo);
 				
 				// con D1 se le puede sacar ahora si los resultados que se necesitan (en este caso con solo llamar a D1 puedes a los resultados de el calculo del impuesto (puede que necesitemos hacer gets de la clase Deducción.))
 		}

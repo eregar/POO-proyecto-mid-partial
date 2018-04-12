@@ -1,4 +1,3 @@
-
 public class Deduccion {
 	
 	private Double	deducir1,
@@ -17,7 +16,21 @@ public class Deduccion {
 		
 		// falta hacer lo de el panel y checar lo del aguinaldo y eso (creo que eso se suma, no se resta)
 	}
-	
+	public String getAguinaldo(){
+		return ""+deducir1;
+	}
+	public String getAFORE(){
+		return ""+deducir2;
+	}
+	public String getUtilidadBruta(){
+		return ""+utilidadBruta;
+	}
+	public String getTotalDeducible(){
+		return ""+totalDeducible;
+	}
+	public String getUtilidadNeta(){
+		return ""+utilidadNeta;
+	}
 	
 	
 	public Double calculaAguinaldo (Double aguinaldo, Double salarioMensual) {
@@ -194,7 +207,7 @@ public class Deduccion {
  		}
 		return utilidadNeta;
  	}
-
+ 		
  	
  	
 	

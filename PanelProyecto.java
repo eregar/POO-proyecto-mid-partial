@@ -113,15 +113,15 @@ public class PanelProyecto extends JPanel {
 		}
 		if(!this.textos[12].getText().equals("0")){//valida 13 si coincide con 12
 			if(prim.isSelected()){
-				setBackground(Color.RED);
+				
 				nivel="Primaria";
 			}
 			else if(sec.isSelected()){
-				setBackground(Color.GREEN);
+				
 				nivel="Secundaria";
 			}
 			else if(prep.isSelected()){
-				setBackground(Color.BLUE);
+				
 				nivel="Bachillerato";
 			}
 			else if (pree.isSelected()){
@@ -138,6 +138,10 @@ public class PanelProyecto extends JPanel {
 			nivel="ninguno";
 		}
 		return 15;// si es que no hay error regresa 15
+	}
+	
+	public String getNivel(){
+		return nivel;
 	}
 	//---------------------------------------------------------------------------------
 	//necesarios: Nombre,RFC,Salario Mensual
