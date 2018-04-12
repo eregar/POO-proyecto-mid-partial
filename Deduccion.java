@@ -3,17 +3,19 @@ public class Deduccion {
 	
 	private Double	deducir1,
 					deducir2,
+					utilidadBruta,
 					totalDeducible,
-					UtilidadNeta;
+					utilidadNeta;
 	
 	
 	public Deduccion (Persona persona1) {
 		this.deducir1 = calculaAguinaldo(persona1.getAguinaldo(), persona1.getSalarioMensual()) + calculaPrimaVacacional(persona1.getPrimaVacacional()) + persona1.getHonorarios() + persona1.getGastosFunerarios() + persona1.getPrimasSGM() + persona1.getInteresesDevengados() + persona1.getDonativos() + persona1.getTransporteEscolar() + calculaColegiatura(persona1.getColegiatura(),persona1.getNivelEducativo());
-		deducir2 = calculaAFORE(persona1.getAFORE(), persona1.getSalarioMensual());
+		this.deducir2 = calculaAFORE(persona1.getAFORE(), persona1.getSalarioMensual());
+		this.utilidadBruta = (persona1.getSalarioMensual() * 12) + persona1.getAguinaldo() + persona1.getPrimaVacacional();
 		this.totalDeducible = this.deducir1 + this.deducir2;
-		this.UtilidadNeta = calculoImpuestos (this.totalDeducible, (persona1.getSalarioMensual() * 12));
+		this.utilidadNeta = calculoImpuestos (this.totalDeducible, this.utilidadBruta);
 		
-		// falta hacer lo de el panel y subirselo a edgar por git hub mas a parte checar lo del aguinaldo y eso (creo que eso se suma, no se resta)
+		// falta hacer lo de el panel y checar lo del aguinaldo y eso (creo que eso se suma, no se resta)
 	}
 	
 	
