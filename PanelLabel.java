@@ -134,7 +134,7 @@ public class PanelLabel extends JPanel implements ActionListener{
 			int errorNumber= pp.validRes();
 			if (errorNumber==15){
 				//que mande los datos a clase que necesite
-				Persona sujeto1 = new Persona(textos[0].getText(), textos[1].getText(), textos[2].getText(), Double.parseDouble(textos[3].getText()), Double.parseDouble(textos[4].getText()), Double.parseDouble(textos[5].getText()), Double.parseDouble(textos[6].getText()), Double.parseDouble(textos[7].getText()), Double.parseDouble(textos[8].getText()), Double.parseDouble(textos[9].getText()), Double.parseDouble(textos[10].getText()), Double.parseDouble(textos[11].getText()), Double.parseDouble(textos[12].getText()));
+				Persona sujeto1 = new Persona(textos[0].getText(), textos[1].getText(), "Aqui va el nivel Educativo", Double.parseDouble(textos[2].getText()), Double.parseDouble(textos[3].getText()), Double.parseDouble(textos[4].getText()), Double.parseDouble(textos[5].getText()), Double.parseDouble(textos[6].getText()), Double.parseDouble(textos[7].getText()), Double.parseDouble(textos[8].getText()), Double.parseDouble(textos[9].getText()), Double.parseDouble(textos[10].getText()), Double.parseDouble(textos[11].getText()), Double.parseDouble(textos[12].getText()));
 				//Aqui se crea la persona para poder luego meterla en la clase Deduccion (lugar donde se calculan los impuestos)
 				D1 = new Deduccion (sujeto1);
 				

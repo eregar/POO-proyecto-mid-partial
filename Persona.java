@@ -15,7 +15,7 @@ public class Persona {
 				   AFORE;
 	
 	
-	public Persona (String nombre, String RFC, String nivelEducativo, Double salarioMensual, Double Aguinaldo, Double primaVacacional, Double honorarios, Double gastosFunerarios, Double primasSGM, Double interesesDevengados, Double donativos, Double transporteEscolar, Double colegiatura) {
+	public Persona (String nombre, String RFC, String nivelEducativo, Double salarioMensual, Double Aguinaldo, Double primaVacacional, Double honorarios, Double gastosFunerarios, Double primasSGM, Double interesesDevengados, Double donativos, Double AFORE ,Double transporteEscolar, Double colegiatura) {
 		this.nombre = nombre;
 		this.RFC = RFC;
 		this.nivelEducativo = nivelEducativo;

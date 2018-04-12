@@ -54,7 +54,7 @@ public class PanelProyecto extends JPanel {
 		this.add(textos[3]);
 		this.add(new JLabel("Prima Vacacional"));
 		this.add(textos[4]);
-		this.add(new JLabel("Deduccion Medico y Hospitalario"));
+		this.add(new JLabel ("Honorarios"));
 		this.add(textos[5]);
 		this.add(new JLabel("Deduccion Gastos Funerarios"));
 		this.add(textos[6]);
@@ -68,7 +68,7 @@ public class PanelProyecto extends JPanel {
 		this.add(textos[10]);
 		this.add(new JLabel("Transporte escolar de hijos"));
 		this.add(textos[11]);
-		this.add(new JLabel("Colegiaturas pagadas"));
+		this.add(new JLabel("Monto pagado de Colegiatura"));
 		this.add(textos[12]);
 		this.add(new JLabel("                Nivel Educativo:               "));
 		//this.add(textos[13]);//aaaaaaaaaaaaaAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
