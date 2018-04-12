@@ -54,7 +54,7 @@ public class PanelLabel extends JPanel implements ActionListener{
 		this.tfEscritor.setEditable(false);
 		this.add(buscarLector);
 		this.add(tfEscritor);
-		this.add(new PanelRes(250,300));
+		this.add(new PanelRes(250,200));
 		this.add(bConfirma);
 		
 		
